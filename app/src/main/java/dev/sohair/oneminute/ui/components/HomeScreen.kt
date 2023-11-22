@@ -29,7 +29,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     val viewModel: HomeScreenViewModel = getViewModel()
     var elapsedTime by remember { mutableStateOf(0L) }
     var timerState by remember { mutableStateOf(TimerState.PAUSED) }
-    var timerText by remember { mutableStateOf("0:00") }
+    var timerText by remember { mutableStateOf("0:00.000") }
     val context = LocalContext.current
 
     LaunchedEffect(viewModel.timerState) {
@@ -44,8 +44,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             val minutes = time / 60
             val seconds = time % 60
             timerText = "$minutes:${if (seconds < 10) "0$seconds" else seconds}"
-            if (time == 0L){
-                NotificationUtils.showNotification(context, "Finished...")
+            if (time == 0L) {
+                NotificationUtils.showNotification(context, "One Minute Completed")
             }
         }
     }
@@ -69,7 +69,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             Button(onClick = {
                 viewModel.stopTimer()
                 elapsedTime = 0L
-                timerText = "0:00"
+                timerText = "0:00.000"
             }) {
                 Text(text = stringResource(id = R.string.stop))
             }

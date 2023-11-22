@@ -36,7 +36,7 @@ object NotificationUtils {
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Timer Expired")
                 .setContentText(contentText)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
 
             with(NotificationManagerCompat.from(context)) {
                 notify(NOTIFICATION_ID, builder.build())

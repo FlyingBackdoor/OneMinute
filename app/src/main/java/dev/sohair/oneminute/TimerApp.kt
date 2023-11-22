@@ -15,6 +15,7 @@ class TimerApp: Application() {
             modules(AppModules.timerModule)
         }
 
+        //Create notification channel
         NotificationUtils.createNotificationChannel(this)
     }
 }
