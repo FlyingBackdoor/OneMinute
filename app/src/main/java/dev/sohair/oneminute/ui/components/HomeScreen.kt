@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -27,7 +28,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     val viewModel: HomeScreenViewModel = getViewModel()
-    var elapsedTime by remember { mutableStateOf(0L) }
+    var elapsedTime by remember { mutableLongStateOf(0L) }
     var timerState by remember { mutableStateOf(TimerState.PAUSED) }
     var timerText by remember { mutableStateOf("0:00.000") }
     val context = LocalContext.current
@@ -38,13 +39,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         }
     }
 
-    LaunchedEffect(viewModel.currentTime) {
-        viewModel.currentTime.collect { time ->
-            elapsedTime = time
-            val minutes = time / 60
-            val seconds = time % 60
-            timerText = "$minutes:${if (seconds < 10) "0$seconds" else seconds}"
-            if (time == 0L) {
+    LaunchedEffect(viewModel.currentMillis) {
+        viewModel.currentMillis.collect { millis ->
+            elapsedTime = millis / 1000
+            val minutes = elapsedTime / 60
+            val seconds = elapsedTime % 60
+            val milliseconds = millis % 1000
+            timerText = "$minutes:${if (seconds < 10) "0$seconds" else seconds}.$milliseconds"
+            if (elapsedTime == 0L) {
                 NotificationUtils.showNotification(context, "One Minute Completed")
             }
         }
