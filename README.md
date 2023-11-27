@@ -4,8 +4,8 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-This is just simple project which will start a one minute timer and show a reducing circle based on the remaining time. 
-When the timer is finished it will show a notification untill the app is in the background.
+This project demonstrates how to create a simple timer app that runs for one minute and displays a circular progress bar that shrinks as the time elapses.
+When the timer reaches zero, the app sends a notification to the user until they return to the app or close it.
 
 ## Screenshot
 ![image](https://github.com/FlyingBackdoor/OneMinute/assets/31269655/4859055e-097d-4a3f-be91-13b86fb416c4)
@@ -14,7 +14,7 @@ When the timer is finished it will show a notification untill the app is in the 
 ## Libraries used:
 - Jetpack compose
 - Material3
-- Lifcycle libs for view model
+- Lifecycle
 - Koin for dependency injection
 
 ## Build a debug apk
